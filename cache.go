@@ -26,7 +26,8 @@ type Cache interface {
 	// invoke the `LoaderFunc` function and inserts the key-value pair in the cache.
 	// If the key is not present in the cache and the cache does not have a LoaderFunc,
 	// return KeyNotFoundError.
-	Get(key interface{}) (interface{}, error)
+	// A boolean indicates whether the key was found in the cache or whether it was populated with a loader function
+	Get(key interface{}) (interface{}, bool, error)
 	// GetIFPresent returns the value for the specified key if it is present in the cache.
 	// Return KeyNotFoundError if the key is not present.
 	GetIFPresent(key interface{}) (interface{}, error)

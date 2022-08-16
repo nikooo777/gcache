@@ -36,7 +36,7 @@ func TestSimpleEvictItem(t *testing.T) {
 	gc := buildTestLoadingCache(t, TYPE_SIMPLE, cacheSize, loader)
 
 	for i := 0; i < numbers; i++ {
-		_, err := gc.Get(fmt.Sprintf("Key-%d", i))
+		_, _, err := gc.Get(fmt.Sprintf("Key-%d", i))
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 		}
@@ -54,7 +54,7 @@ func TestSimpleUnboundedNoEviction(t *testing.T) {
 			t.Errorf("Excepted cache size is %v not %v", current_size, size_tracker)
 		}
 
-		_, err := gcu.Get(fmt.Sprintf("Key-%d", i))
+		_, _, err := gcu.Get(fmt.Sprintf("Key-%d", i))
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 		}

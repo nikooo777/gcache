@@ -25,7 +25,7 @@ func testSetCache(t *testing.T, gc Cache, numbers int) {
 func testGetCache(t *testing.T, gc Cache, numbers int) {
 	for i := 0; i < numbers; i++ {
 		key := fmt.Sprintf("Key-%d", i)
-		v, err := gc.Get(key)
+		v, _, err := gc.Get(key)
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 		}

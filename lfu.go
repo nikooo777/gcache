@@ -114,12 +114,13 @@ func (c *LFUCache) set(key, value interface{}) (interface{}, error) {
 // Get a value from cache pool using key if it exists.
 // If it does not exists key and has LoaderFunc,
 // generate a value using `LoaderFunc` method returns value.
-func (c *LFUCache) Get(key interface{}) (interface{}, error) {
+func (c *LFUCache) Get(key interface{}) (interface{}, bool, error) {
 	v, err := c.get(key, false)
 	if err == KeyNotFoundError {
-		return c.getWithLoader(key, true)
+		v, err = c.getWithLoader(key, true)
+		return v, false, err
 	}
-	return v, err
+	return v, true, err
 }
 
 // GetIFPresent gets a value from cache pool using key if it exists.

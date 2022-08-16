@@ -44,7 +44,7 @@ func TestARCEvictItem(t *testing.T) {
 	gc := buildTestLoadingCache(t, TYPE_ARC, cacheSize, loader)
 
 	for i := 0; i < numbers; i++ {
-		_, err := gc.Get(fmt.Sprintf("Key-%d", i))
+		_, _, err := gc.Get(fmt.Sprintf("Key-%d", i))
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 		}
@@ -63,7 +63,7 @@ func TestARCPurgeCache(t *testing.T) {
 		Build()
 
 	for i := 0; i < cacheSize; i++ {
-		_, err := gc.Get(fmt.Sprintf("Key-%d", i))
+		_, _, err := gc.Get(fmt.Sprintf("Key-%d", i))
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 		}

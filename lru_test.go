@@ -36,7 +36,7 @@ func TestLRUEvictItem(t *testing.T) {
 	gc := buildTestLoadingCache(t, TYPE_LRU, cacheSize, loader)
 
 	for i := 0; i < numbers; i++ {
-		_, err := gc.Get(fmt.Sprintf("Key-%d", i))
+		_, _, err := gc.Get(fmt.Sprintf("Key-%d", i))
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 		}

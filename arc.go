@@ -163,12 +163,13 @@ func (c *ARC) set(key, value interface{}) (interface{}, error) {
 }
 
 // Get a value from cache pool using key if it exists. If not exists and it has LoaderFunc, it will generate the value using you have specified LoaderFunc method returns value.
-func (c *ARC) Get(key interface{}) (interface{}, error) {
+func (c *ARC) Get(key interface{}) (interface{}, bool, error) {
 	v, err := c.get(key, false)
 	if err == KeyNotFoundError {
-		return c.getWithLoader(key, true)
+		v, err = c.getWithLoader(key, true)
+		return v, false, err
 	}
-	return v, err
+	return v, true, err
 }
 
 // GetIFPresent gets a value from cache pool using key if it exists.

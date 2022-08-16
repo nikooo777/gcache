@@ -34,7 +34,7 @@ func TestLoaderFunc(t *testing.T) {
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				_, err := cache.Get(0)
+				_, _, err := cache.Get(0)
 				if err != nil {
 					t.Error(err)
 				}
@@ -72,7 +72,7 @@ func TestLoaderExpireFuncWithoutExpire(t *testing.T) {
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				_, err := cache.Get(0)
+				_, _, err := cache.Get(0)
 				if err != nil {
 					t.Error(err)
 				}
@@ -110,7 +110,7 @@ func TestLoaderExpireFuncWithExpire(t *testing.T) {
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				_, err := cache.Get(0)
+				_, _, err := cache.Get(0)
 				if err != nil {
 					t.Error(err)
 				}
@@ -121,7 +121,7 @@ func TestLoaderExpireFuncWithExpire(t *testing.T) {
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				_, err := cache.Get(0)
+				_, _, err := cache.Get(0)
 				if err != nil {
 					t.Error(err)
 				}
@@ -181,7 +181,7 @@ func TestLoaderPurgeVisitorFunc(t *testing.T) {
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				_, err := cache.Get(i)
+				_, _, err := cache.Get(i)
 				if err != nil {
 					t.Error(err)
 				}
@@ -239,14 +239,14 @@ func TestDeserializeFunc(t *testing.T) {
 				return buf.Bytes(), err
 			}).
 			Build()
-		v, err := cc.Get(key1)
+		v, _, err := cc.Get(key1)
 		if err != nil {
 			t.Fatal(err)
 		}
 		if v != value1 {
 			t.Errorf("%v != %v", v, value1)
 		}
-		v, err = cc.Get(key1)
+		v, _, err = cc.Get(key1)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -256,7 +256,7 @@ func TestDeserializeFunc(t *testing.T) {
 		if err := cc.Set(key2, value2); err != nil {
 			t.Error(err)
 		}
-		v, err = cc.Get(key2)
+		v, _, err = cc.Get(key2)
 		if err != nil {
 			t.Error(err)
 		}
